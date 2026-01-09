@@ -40,10 +40,10 @@ export class GildedRose {
         if (this.items[i].quality < this.MAX_QUALITY) {
           this.items[i].quality = this.increaseQuality(this.items[i].quality)
           if (this.items[i].name == this.BACKSTAGE_PASSES) {
-            if (this.items[i].sellIn < 11) {
+            if (this.items[i].sellIn < this.BACKSTAGE_PASSES_PLUS_ONE_SELL_IN) {
               this.items[i].quality = this.increaseQuality(this.items[i].quality)
             }
-            if (this.items[i].sellIn < 6) {
+            if (this.items[i].sellIn < this.BACKSTAGE_PASSES_PLUS_TWO_SELL_IN) {
               this.items[i].quality = this.increaseQuality(this.items[i].quality)
             }
           }
