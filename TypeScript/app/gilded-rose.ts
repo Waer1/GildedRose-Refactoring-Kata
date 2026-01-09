@@ -28,7 +28,7 @@ export class GildedRose {
       if (this.items[i].name != this.AGED_BRIE && this.items[i].name != this.BACKSTAGE_PASSES) {
 
         if (this.items[i].quality > 0) {
-          if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
+          if (this.items[i].name != this.SULFURAS) {
             this.items[i].quality = this.items[i].quality - 1
           }
         }
@@ -52,7 +52,7 @@ export class GildedRose {
         }
 
       }
-      if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
+      if (this.items[i].name != this.SULFURAS) {
         this.items[i].sellIn = this.items[i].sellIn - 1;
       }
 
@@ -60,7 +60,7 @@ export class GildedRose {
         if (this.items[i].name != this.AGED_BRIE) {
           if (this.items[i].name != this.BACKSTAGE_PASSES) {
             if (this.items[i].quality > 0) {
-              if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
+              if (this.items[i].name != this.SULFURAS) {
                 this.items[i].quality = this.items[i].quality - 1
               }
             }
