@@ -12,6 +12,8 @@ export class Item {
 
 export class GildedRose {
   private readonly AGED_BRIE = 'Aged Brie';
+  private readonly BACKSTAGE_PASSES = 'Backstage passes to a TAFKAL80ETC concert';
+  
 
   items: Array<Item>;
 
