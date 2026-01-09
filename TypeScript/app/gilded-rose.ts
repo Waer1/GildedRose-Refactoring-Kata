@@ -49,9 +49,7 @@ export class GildedRose {
       }
 
 
-      if (this.items[i].name != this.SULFURAS) {
-        this.items[i].sellIn = this.items[i].sellIn - 1;
-      }
+      this.items[i].sellIn = this.decreaseSellIn(this.items[i]);
 
       if (this.items[i].sellIn < 0) {
         if (this.items[i].name != this.AGED_BRIE) {
