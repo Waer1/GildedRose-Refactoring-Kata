@@ -13,6 +13,7 @@ export class Item {
 export class GildedRose {
   private readonly AGED_BRIE = 'Aged Brie';
   private readonly BACKSTAGE_PASSES = 'Backstage passes to a TAFKAL80ETC concert';
+  private readonly SULFURAS = 'Sulfuras, Hand of Ragnaros';
   
 
   items: Array<Item>;
