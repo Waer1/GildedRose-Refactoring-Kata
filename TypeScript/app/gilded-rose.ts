@@ -92,6 +92,15 @@ class BackstagePassesRoseItem extends RoseItem {
   }
 }
 
+class Conjured extends RoseItem {
+  updateQuality(): void {
+    this.decreaseQuality(2);
+    if (this.getSellIn() < 0) {
+      this.decreaseQuality(2);
+    }
+  }
+}
+
 export class GildedRose {
 
   private getRoseClass(item: Item): RoseItem {
@@ -104,6 +113,9 @@ export class GildedRose {
     if (item.name == this.BACKSTAGE_PASSES) {
       return new BackstagePassesRoseItem(item);
     }
+    if (item.name == this.CONJURED) {
+      return new Conjured(item);
+    }
     return new RegualrRoseItem(item);
   }
 
@@ -111,7 +123,7 @@ export class GildedRose {
   private readonly AGED_BRIE = 'Aged Brie';
   private readonly BACKSTAGE_PASSES = 'Backstage passes to a TAFKAL80ETC concert';
   private readonly SULFURAS = 'Sulfuras, Hand of Ragnaros';
-  private readonly MAX_QUALITY = 50;
+  private readonly CONJURED = 'Conjured';
 
 
   items: Array<Item>;
