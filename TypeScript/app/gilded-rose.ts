@@ -18,7 +18,7 @@ export class GildedRose {
   private readonly MIN_QUALITY = 0;
   private readonly BACKSTAGE_PASSES_PLUS_ONE_SELL_IN = 11;
   private readonly BACKSTAGE_PASSES_PLUS_TWO_SELL_IN = 6;
-  
+
 
   items: Array<Item>;
 
@@ -32,17 +32,25 @@ export class GildedRose {
       if (this.isNormalRose(this.items[i].name)) {
         this.items[i].quality = this.decreaseQuality(this.items[i])
       } else {
-          this.items[i].quality = this.increaseQuality(this.items[i].quality)
-          if (this.items[i].name == this.BACKSTAGE_PASSES) {
-            this.items[i].quality = this.getBackstagePassesQuality(this.items[i])
-          }
+        this.items[i].quality = this.increaseQuality(this.items[i].quality)
+        if (this.items[i].name == this.BACKSTAGE_PASSES) {
+          this.items[i].quality = this.getBackstagePassesQuality(this.items[i])
+        }
       }
+    }
+
+    for (let i = 0; i < this.items.length; i++) {
+
 
       this.items[i].sellIn = this.decreaseSellIn(this.items[i]);
+    }
 
-      if(this.items[i].sellIn >= 0) continue;
+    for (let i = 0; i < this.items.length; i++) {
 
-      if(this.items[i].name == this.AGED_BRIE) {
+
+      if (this.items[i].sellIn >= 0) continue;
+
+      if (this.items[i].name == this.AGED_BRIE) {
         this.items[i].quality = this.increaseQuality(this.items[i].quality)
       }
       else if (this.items[i].name == this.BACKSTAGE_PASSES) {
@@ -57,24 +65,24 @@ export class GildedRose {
   }
 
   private increaseQuality(quantity: number) {
-    if(quantity < this.MAX_QUALITY) {
+    if (quantity < this.MAX_QUALITY) {
       quantity = quantity + 1
     }
     return quantity
   }
 
   private decreaseSellIn(item: Item): number {
-      if(item.name != this.SULFURAS) {
-        item.sellIn = item.sellIn - 1;
-      }
-      return item.sellIn
+    if (item.name != this.SULFURAS) {
+      item.sellIn = item.sellIn - 1;
+    }
+    return item.sellIn
   }
-  
+
   private decreaseQuality(item: Item) {
     if (item.name == this.SULFURAS) {
       return item.quality
     }
-    if(item.quality > this.MIN_QUALITY) {
+    if (item.quality > this.MIN_QUALITY) {
       item.quality = item.quality - 1
     }
     return item.quality
