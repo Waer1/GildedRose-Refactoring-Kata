@@ -92,6 +92,7 @@ class BackstagePassesRoseItem extends RoseItem {
   }
 }
 
+
 class Conjured extends RoseItem {
   updateQuality(): void {
     this.decreaseQuality(2);
