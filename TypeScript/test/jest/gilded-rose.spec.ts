@@ -22,4 +22,20 @@ describe('Gilded Rose', () => {
       expect(items[0].quality).toBe(0);
     });
   });
+
+  describe('Aged Brie', () => {
+    it('increases in quality as it gets older', () => {
+      const gildedRose = new GildedRose([new Item('Aged Brie', 10, 20)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(9);
+      expect(items[0].quality).toBe(21);
+    });
+
+    it('increases quality twice as fast after sell date passes', () => {
+      const gildedRose = new GildedRose([new Item('Aged Brie', 0, 20)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-1);
+      expect(items[0].quality).toBe(22);
+    });
+  });
 });
