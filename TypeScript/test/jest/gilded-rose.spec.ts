@@ -21,6 +21,12 @@ describe('Gilded Rose', () => {
       const items = gildedRose.updateQuality();
       expect(items[0].quality).toBe(0);
     });
+
+    it('quality is never negative after sell date passes', () => {
+      const gildedRose = new GildedRose([new Item('Normal Item', 0, 1)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(0);
+    });
   });
 
   describe('Aged Brie', () => {
