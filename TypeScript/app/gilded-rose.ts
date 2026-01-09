@@ -18,22 +18,30 @@ interface RoseItem {
     updateQuality(): void;
 }
 
-abstract class RoseItem extends Item implements RoseItem {
-    private readonly MAX_QUALITY = 50;
-    private readonly MIN_QUALITY = 0;
+abstract class RoseItem implements RoseItem {
+  private readonly item: Item;
+  private readonly MAX_QUALITY = 50;
+  private readonly MIN_QUALITY = 0;
+
+  constructor(item: Item) {
+    this.item = item;
+  }
 
   updateSellIn() {
-    this.sellIn = this.sellIn - 1;
+    this.item.sellIn = this.item.sellIn - 1;
   }
 
   increaseQuality(amount: number) {
-    return Math.min(this.quality + amount, this.MAX_QUALITY)
+    return Math.min(this.item.quality + amount, this.MAX_QUALITY)
   }
 
   decreaseQuality(amount: number) {
-    return Math.max(this.quality - amount, this.MIN_QUALITY)
+    return Math.max(this.item.quality - amount, this.MIN_QUALITY)
   }
 }
+
+
+
 
 
 
