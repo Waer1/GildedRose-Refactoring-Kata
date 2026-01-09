@@ -77,7 +77,8 @@ export class GildedRose {
 
     for (let item of this.items) {
       if (this.isNormalRose(item.name)) {
-        item.quality = this.decreaseQuality(item)
+        const normalRoseItem = this.getRoseClass(item);
+        normalRoseItem.updateQuality();
       } else {
         item.quality = this.increaseQuality(item.quality)
         if (item.name == this.BACKSTAGE_PASSES) {
