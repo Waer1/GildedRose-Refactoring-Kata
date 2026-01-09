@@ -130,23 +130,4 @@ export class GildedRose {
 
     return this.items;
   }
-
-  private increaseQuality(quantity: number) {
-    if (quantity < this.MAX_QUALITY) {
-      quantity = quantity + 1
-    }
-    return quantity
-  }
-
-  private decreaseSellIn(item: Item): number {
-    if (item.name != this.SULFURAS) {
-      item.sellIn = item.sellIn - 1;
-    }
-    return item.sellIn
-  }
-
-
-  private isNormalRose(name: string) {
-    return name != this.AGED_BRIE && name != this.BACKSTAGE_PASSES && name != this.SULFURAS;
-  }
 }
