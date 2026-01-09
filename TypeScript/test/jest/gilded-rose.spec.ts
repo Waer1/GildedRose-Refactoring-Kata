@@ -43,5 +43,11 @@ describe('Gilded Rose', () => {
       expect(items[0].sellIn).toBe(-1);
       expect(items[0].quality).toBe(22);
     });
+
+    it('quality is never more than 50', () => {
+      const gildedRose = new GildedRose([new Item('Aged Brie', 10, 50)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(50);
+    });
   });
 });
