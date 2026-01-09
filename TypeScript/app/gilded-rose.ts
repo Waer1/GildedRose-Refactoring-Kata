@@ -31,22 +31,14 @@ export class GildedRose {
 
       if (this.isNormalRose(this.items[i].name)) {
         this.items[i].quality = this.decreaseQuality(this.items[i])
-
       } else {
-
-        if (this.items[i].quality < this.MAX_QUALITY) {
           this.items[i].quality = this.increaseQuality(this.items[i].quality)
           if (this.items[i].name == this.BACKSTAGE_PASSES) {
             this.items[i].quality = this.getBackstagePassesQuality(this.items[i])
           }
-        }
-
       }
 
-
       this.items[i].sellIn = this.decreaseSellIn(this.items[i]);
-
-
 
       if(this.items[i].sellIn >= 0) continue;
 
