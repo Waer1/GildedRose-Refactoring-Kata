@@ -104,9 +104,6 @@ export class GildedRose {
   private readonly BACKSTAGE_PASSES = 'Backstage passes to a TAFKAL80ETC concert';
   private readonly SULFURAS = 'Sulfuras, Hand of Ragnaros';
   private readonly MAX_QUALITY = 50;
-  private readonly MIN_QUALITY = 0;
-  private readonly BACKSTAGE_PASSES_PLUS_ONE_SELL_IN = 11;
-  private readonly BACKSTAGE_PASSES_PLUS_TWO_SELL_IN = 6;
 
 
   items: Array<Item>;
@@ -122,14 +119,6 @@ export class GildedRose {
 
       if (this.isNormalRose(item.name)) {
         normalRoseItem.updateQuality();
-      } else if (item.name == this.BACKSTAGE_PASSES) {
-        item.quality = this.increaseQuality(item.quality)
-        if (item.sellIn < this.BACKSTAGE_PASSES_PLUS_ONE_SELL_IN) {
-          item.quality = this.increaseQuality(item.quality)
-        }
-        if (item.sellIn < this.BACKSTAGE_PASSES_PLUS_TWO_SELL_IN) {
-          item.quality = this.increaseQuality(item.quality)
-        }
       } else if (item.name == this.SULFURAS) {
         normalRoseItem.updateQuality();
       }
@@ -146,8 +135,8 @@ export class GildedRose {
         normalRoseItem.updateQuality()
       }
       
-      if (item.name == this.BACKSTAGE_PASSES && item.sellIn < 0) {
-        item.quality = 0
+      if (item.name == this.BACKSTAGE_PASSES) {
+        normalRoseItem.updateQuality()
       } else if (item.name == this.SULFURAS) {
         normalRoseItem.updateQuality();
       } else if (this.isNormalRose(item.name) && item.sellIn < 0) {
