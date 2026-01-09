@@ -13,8 +13,8 @@ export class Item {
 
 interface RoseItem {
     updateSellIn(): void;
-    increaseQuality(amount: number): number;
-    decreaseQuality(amount: number): number;
+    increaseQuality(amount: number): void;
+    decreaseQuality(amount: number): void;
     updateQuality(): void;
 }
 
@@ -32,20 +32,32 @@ abstract class RoseItem implements RoseItem {
   }
 
   increaseQuality(amount: number) {
-    return Math.min(this.item.quality + amount, this.MAX_QUALITY)
+    this.item.quality = Math.min(this.item.quality + amount, this.MAX_QUALITY)
   }
 
   decreaseQuality(amount: number) {
-    return Math.max(this.item.quality - amount, this.MIN_QUALITY)
+    this.item.quality = Math.max(this.item.quality - amount, this.MIN_QUALITY)
+  }
+}
+
+
+
+class RegualrRoseItem extends RoseItem {
+  updateQuality(): void {
+    this.decreaseQuality(1);
   }
 }
 
 
 
 
-
-
 export class GildedRose {
+
+  private getRoseClass(item: Item): RoseItem {
+      return new RegualrRoseItem(item);
+  }
+
+
   private readonly AGED_BRIE = 'Aged Brie';
   private readonly BACKSTAGE_PASSES = 'Backstage passes to a TAFKAL80ETC concert';
   private readonly SULFURAS = 'Sulfuras, Hand of Ragnaros';
