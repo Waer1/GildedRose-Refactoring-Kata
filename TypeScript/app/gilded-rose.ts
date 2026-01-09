@@ -12,10 +12,10 @@ export class Item {
 
 
 interface RoseItem {
-    updateSellIn(): void;
-    increaseQuality(amount: number): void;
-    decreaseQuality(amount: number): void;
-    updateQuality(): void;
+  updateSellIn(): void;
+  increaseQuality(amount: number): void;
+  decreaseQuality(amount: number): void;
+  updateQuality(): void;
 }
 
 abstract class RoseItem implements RoseItem {
@@ -38,6 +38,10 @@ abstract class RoseItem implements RoseItem {
   decreaseQuality(amount: number) {
     this.item.quality = Math.max(this.item.quality - amount, this.MIN_QUALITY)
   }
+
+  getSellIn(): number {
+    return this.item.sellIn;
+  }
 }
 
 class RegualrRoseItem extends RoseItem {
@@ -52,12 +56,25 @@ class SulfurasRoseItem extends RoseItem {
 }
 
 
+class AgedBrieRoseItem extends RoseItem {
+  updateQuality(): void {
+    if(this.getSellIn() < 0) {
+      this.increaseQuality(2);
+    } else {
+      this.increaseQuality(1);
+    }
+  }
+}
+
 
 export class GildedRose {
 
   private getRoseClass(item: Item): RoseItem {
     if (item.name == this.SULFURAS) {
       return new SulfurasRoseItem(item);
+    }
+    if (item.name == this.AGED_BRIE) {
+      return new AgedBrieRoseItem(item);
     }
     return new RegualrRoseItem(item);
   }
@@ -85,17 +102,17 @@ export class GildedRose {
 
       if (this.isNormalRose(item.name)) {
         normalRoseItem.updateQuality();
-      } else if(item.name == this.AGED_BRIE) {
+      } else if (item.name == this.AGED_BRIE) {
         item.quality = this.increaseQuality(item.quality)
-      } else if(item.name == this.BACKSTAGE_PASSES) {
+      } else if (item.name == this.BACKSTAGE_PASSES) {
+        item.quality = this.increaseQuality(item.quality)
+        if (item.sellIn < this.BACKSTAGE_PASSES_PLUS_ONE_SELL_IN) {
           item.quality = this.increaseQuality(item.quality)
-          if(item.sellIn < this.BACKSTAGE_PASSES_PLUS_ONE_SELL_IN) {
-            item.quality = this.increaseQuality(item.quality)
-          }
-          if(item.sellIn < this.BACKSTAGE_PASSES_PLUS_TWO_SELL_IN) {
-            item.quality = this.increaseQuality(item.quality)
-          }
-      } else if(item.name == this.SULFURAS) {
+        }
+        if (item.sellIn < this.BACKSTAGE_PASSES_PLUS_TWO_SELL_IN) {
+          item.quality = this.increaseQuality(item.quality)
+        }
+      } else if (item.name == this.SULFURAS) {
         normalRoseItem.updateQuality();
       }
     }
@@ -114,9 +131,9 @@ export class GildedRose {
       }
       else if (item.name == this.BACKSTAGE_PASSES) {
         item.quality = 0
-      } else if (item.name == this.SULFURAS){
+      } else if (item.name == this.SULFURAS) {
         normalRoseItem.updateQuality();
-      } else {
+      } else if (this.isNormalRose(item.name)) {
         normalRoseItem.updateQuality();
       }
 
