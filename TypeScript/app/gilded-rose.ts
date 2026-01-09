@@ -10,6 +10,27 @@ export class Item {
   }
 }
 
+
+class RoseItem extends Item {
+    private readonly MAX_QUALITY = 50;
+    private readonly MIN_QUALITY = 0;
+
+  updateSellIn() {
+    this.sellIn = this.sellIn - 1;
+  }
+
+  increaseQuality(amount: number) {
+    return Math.min(this.quality + amount, this.MAX_QUALITY)
+  }
+
+  decreaseQuality(amount: number) {
+    return Math.max(this.quality - amount, this.MIN_QUALITY)
+  }
+}
+
+
+
+
 export class GildedRose {
   private readonly AGED_BRIE = 'Aged Brie';
   private readonly BACKSTAGE_PASSES = 'Backstage passes to a TAFKAL80ETC concert';
