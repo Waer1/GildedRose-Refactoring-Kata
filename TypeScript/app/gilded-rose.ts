@@ -27,36 +27,34 @@ export class GildedRose {
   }
 
   updateQuality() {
-    for (let i = 0; i < this.items.length; i++) {
 
-      if (this.isNormalRose(this.items[i].name)) {
-        this.items[i].quality = this.decreaseQuality(this.items[i])
+    for (let item of this.items) {
+      if (this.isNormalRose(item.name)) {
+        item.quality = this.decreaseQuality(item)
       } else {
-        this.items[i].quality = this.increaseQuality(this.items[i].quality)
-        if (this.items[i].name == this.BACKSTAGE_PASSES) {
-          this.items[i].quality = this.getBackstagePassesQuality(this.items[i])
+        item.quality = this.increaseQuality(item.quality)
+        if (item.name == this.BACKSTAGE_PASSES) {
+          item.quality = this.getBackstagePassesQuality(item)
         }
       }
     }
 
-    for (let i = 0; i < this.items.length; i++) {
-
-
-      this.items[i].sellIn = this.decreaseSellIn(this.items[i]);
+    for (let item of this.items) {
+      item.sellIn = this.decreaseSellIn(item);
     }
 
-    for (let i = 0; i < this.items.length; i++) {
+    for (let item of this.items) {
 
 
-      if (this.items[i].sellIn >= 0) continue;
+      if (item.sellIn >= 0) continue;
 
-      if (this.items[i].name == this.AGED_BRIE) {
-        this.items[i].quality = this.increaseQuality(this.items[i].quality)
+      if (item.name == this.AGED_BRIE) {
+        item.quality = this.increaseQuality(item.quality)
       }
-      else if (this.items[i].name == this.BACKSTAGE_PASSES) {
-        this.items[i].quality = 0
+      else if (item.name == this.BACKSTAGE_PASSES) {
+        item.quality = 0
       } else {
-        this.items[i].quality = this.decreaseQuality(this.items[i])
+        item.quality = this.decreaseQuality(item)
       }
 
     }
