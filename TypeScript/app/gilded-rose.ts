@@ -84,6 +84,16 @@ export class GildedRose {
       }
       return item.sellIn
   }
+  
+  private decreaseQuality(item: Item) {
+    if (item.name == this.SULFURAS) {
+      return item.quality
+    }
+    if(item.quality > this.MIN_QUALITY) {
+      item.quality = item.quality - 1
+    }
+    return item.quality
+  }
 
   private getBackstagePassesQuality(item: Item) {
     let quality = item.quality;
