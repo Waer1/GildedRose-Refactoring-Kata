@@ -59,4 +59,13 @@ describe('Gilded Rose', () => {
       expect(items[0].quality).toBe(80);
     });
   });
+
+  describe('Backstage passes', () => {
+    it('increases quality by 1 when more than 10 days', () => {
+      const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(14);
+      expect(items[0].quality).toBe(21);
+    });
+  });
 });
