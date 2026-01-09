@@ -51,23 +51,23 @@ export class GildedRose {
 
       this.items[i].sellIn = this.decreaseSellIn(this.items[i]);
 
-      if (this.items[i].sellIn < 0) {
-        if (this.items[i].name != this.AGED_BRIE) {
-          if (this.items[i].name != this.BACKSTAGE_PASSES) {
-            if (this.items[i].quality > 0) {
-              if (this.items[i].name != this.SULFURAS) {
-                this.items[i].quality = this.items[i].quality - 1
-              }
+
+
+      if(this.items[i].sellIn >= 0) continue;
+
+      if (this.items[i].name != this.AGED_BRIE) {
+        if (this.items[i].name != this.BACKSTAGE_PASSES) {
+          if (this.items[i].quality > 0) {
+            if (this.items[i].name != this.SULFURAS) {
+              this.items[i].quality = this.items[i].quality - 1
             }
-          } else {
-            this.items[i].quality = this.items[i].quality - this.items[i].quality
           }
         } else {
-          this.items[i].quality = this.increaseQuality(this.items[i].quality)
+          this.items[i].quality = this.items[i].quality - this.items[i].quality
         }
+      } else {
+        this.items[i].quality = this.increaseQuality(this.items[i].quality)
       }
-
-
 
     }
 
@@ -87,6 +87,8 @@ export class GildedRose {
       }
       return item.sellIn
   }
+
+
 
   private isNormalRose(name: string) {
     return name != this.AGED_BRIE && name != this.BACKSTAGE_PASSES && name != this.SULFURAS;
