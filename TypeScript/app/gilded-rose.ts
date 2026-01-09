@@ -30,10 +30,7 @@ export class GildedRose {
     for (let i = 0; i < this.items.length; i++) {
 
       if (this.isNormalRose(this.items[i].name)) {
-
-        if (this.items[i].quality > 0) {
-            this.items[i].quality = this.items[i].quality - 1
-        }
+        this.items[i].quality = this.decreaseQuality(this.items[i])
 
       } else {
 
@@ -59,11 +56,7 @@ export class GildedRose {
       else if (this.items[i].name == this.BACKSTAGE_PASSES) {
         this.items[i].quality = 0
       } else {
-        if (this.items[i].quality > 0) {
-          if (this.items[i].name != this.SULFURAS) {
-            this.items[i].quality = this.items[i].quality - 1
-          }
-        }
+        this.items[i].quality = this.decreaseQuality(this.items[i])
       }
 
     }
