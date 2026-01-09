@@ -105,7 +105,7 @@ export class GildedRose {
     }
 
     for (let item of this.items) {
-
+      const normalRoseItem = this.getRoseClass(item);
 
       if (item.sellIn >= 0) continue;
 
@@ -115,8 +115,8 @@ export class GildedRose {
       else if (item.name == this.BACKSTAGE_PASSES) {
         item.quality = 0
       } else if (item.name == this.SULFURAS){
+        normalRoseItem.updateQuality();
       } else {
-        const normalRoseItem = this.getRoseClass(item);
         normalRoseItem.updateQuality();
       }
 
