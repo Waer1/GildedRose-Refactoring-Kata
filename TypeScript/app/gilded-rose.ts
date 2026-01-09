@@ -51,6 +51,9 @@ abstract class RoseItem implements RoseItem {
 class RegualrRoseItem extends RoseItem {
   updateQuality(): void {
     this.decreaseQuality(1);
+    if (this.getSellIn() < 0) {
+      this.decreaseQuality(1);
+    }
   }
 }
 
@@ -73,12 +76,15 @@ class AgedBrieRoseItem extends RoseItem {
 }
 
 class BackstagePassesRoseItem extends RoseItem {
+  private readonly BACKSTAGE_PASSES_PLUS_ONE_SELL_IN = 10;
+  private readonly BACKSTAGE_PASSES_PLUS_TWO_SELL_IN = 5;
+
   updateQuality(): void {
     if (this.getSellIn() < 0) {
       this.setQuality(0);
-    } else if (this.getSellIn() < 5) {
+    } else if (this.getSellIn() < this.BACKSTAGE_PASSES_PLUS_TWO_SELL_IN) {
       this.increaseQuality(3);
-    } else if (this.getSellIn() < 10) {
+    } else if (this.getSellIn() < this.BACKSTAGE_PASSES_PLUS_ONE_SELL_IN) {
       this.increaseQuality(2);
     } else {
       this.increaseQuality(1);
@@ -118,32 +124,8 @@ export class GildedRose {
 
     for (let item of this.items) {
       const normalRoseItem = this.getRoseClass(item);
-
-      if (this.isNormalRose(item.name)) {
-        normalRoseItem.updateQuality();
-      } else if (item.name == this.SULFURAS) {
-        normalRoseItem.updateQuality();
-      }
-
       normalRoseItem.updateSellIn();
-    }
-
-
-    for (let item of this.items) {
-      const normalRoseItem = this.getRoseClass(item);
-
-      if (item.name == this.AGED_BRIE) {
-        normalRoseItem.updateQuality()
-      }
-      
-      if (item.name == this.BACKSTAGE_PASSES) {
-        normalRoseItem.updateQuality()
-      } else if (item.name == this.SULFURAS) {
-        normalRoseItem.updateQuality();
-      } else if (this.isNormalRose(item.name) && item.sellIn < 0) {
-        normalRoseItem.updateQuality();
-      }
-
+      normalRoseItem.updateQuality();
     }
 
     return this.items;
