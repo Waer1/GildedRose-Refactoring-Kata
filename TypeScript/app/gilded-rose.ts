@@ -46,13 +46,20 @@ class RegualrRoseItem extends RoseItem {
   }
 }
 
+class SulfurasRoseItem extends RoseItem {
+  updateQuality(): void {
+  }
+}
 
 
 
 export class GildedRose {
 
   private getRoseClass(item: Item): RoseItem {
-      return new RegualrRoseItem(item);
+    if (item.name == this.SULFURAS) {
+      return new SulfurasRoseItem(item);
+    }
+    return new RegualrRoseItem(item);
   }
 
 
@@ -74,8 +81,9 @@ export class GildedRose {
   updateQuality() {
 
     for (let item of this.items) {
+      const normalRoseItem = this.getRoseClass(item);
+
       if (this.isNormalRose(item.name)) {
-        const normalRoseItem = this.getRoseClass(item);
         normalRoseItem.updateQuality();
       } else if(item.name == this.AGED_BRIE) {
         item.quality = this.increaseQuality(item.quality)
@@ -88,7 +96,7 @@ export class GildedRose {
             item.quality = this.increaseQuality(item.quality)
           }
       } else if(item.name == this.SULFURAS) {
-
+        normalRoseItem.updateQuality();
       }
     }
 
