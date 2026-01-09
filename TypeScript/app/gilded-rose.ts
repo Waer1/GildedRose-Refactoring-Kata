@@ -11,7 +11,14 @@ export class Item {
 }
 
 
-class RoseItem extends Item {
+interface RoseItem {
+    updateSellIn(): void;
+    increaseQuality(amount: number): number;
+    decreaseQuality(amount: number): number;
+    updateQuality(): void;
+}
+
+abstract class RoseItem extends Item implements RoseItem {
     private readonly MAX_QUALITY = 50;
     private readonly MIN_QUALITY = 0;
 
@@ -27,7 +34,6 @@ class RoseItem extends Item {
     return Math.max(this.quality - amount, this.MIN_QUALITY)
   }
 }
-
 
 
 
