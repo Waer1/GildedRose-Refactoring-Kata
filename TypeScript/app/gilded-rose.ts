@@ -58,7 +58,7 @@ class SulfurasRoseItem extends RoseItem {
 
 class AgedBrieRoseItem extends RoseItem {
   updateQuality(): void {
-    if(this.getSellIn() < 0) {
+    if(this.getSellIn() <= 0) {
       this.increaseQuality(2);
     } else {
       this.increaseQuality(1);
@@ -124,16 +124,14 @@ export class GildedRose {
     for (let item of this.items) {
       const normalRoseItem = this.getRoseClass(item);
 
-      if (item.sellIn >= 0) continue;
-
-      if (item.name == this.AGED_BRIE) {
+      if (item.name == this.AGED_BRIE && item.sellIn < 0) {
         item.quality = this.increaseQuality(item.quality)
       }
-      else if (item.name == this.BACKSTAGE_PASSES) {
+      else if (item.name == this.BACKSTAGE_PASSES && item.sellIn < 0) {
         item.quality = 0
       } else if (item.name == this.SULFURAS) {
         normalRoseItem.updateQuality();
-      } else if (this.isNormalRose(item.name)) {
+      } else if (this.isNormalRose(item.name) && item.sellIn < 0) {
         normalRoseItem.updateQuality();
       }
 
