@@ -77,11 +77,13 @@ export class GildedRose {
       if (this.isNormalRose(item.name)) {
         const normalRoseItem = this.getRoseClass(item);
         normalRoseItem.updateQuality();
-      } else {
+      } else if(item.name == this.AGED_BRIE) {
         item.quality = this.increaseQuality(item.quality)
-        if (item.name == this.BACKSTAGE_PASSES) {
+      } else if(item.name == this.BACKSTAGE_PASSES) {
+          item.quality = this.increaseQuality(item.quality)
           item.quality = this.getBackstagePassesQuality(item)
-        }
+      } else if(item.name == this.SULFURAS) {
+
       }
     }
 
