@@ -15,6 +15,9 @@ export class GildedRose {
   private readonly BACKSTAGE_PASSES = 'Backstage passes to a TAFKAL80ETC concert';
   private readonly SULFURAS = 'Sulfuras, Hand of Ragnaros';
   private readonly MAX_QUALITY = 50;
+  private readonly MIN_QUALITY = 0;
+  private readonly BACKSTAGE_PASSES_PLUS_ONE_SELL_IN = 11;
+  private readonly BACKSTAGE_PASSES_PLUS_TWO_SELL_IN = 6;
   
 
   items: Array<Item>;
