@@ -57,6 +57,8 @@ class RegualrRoseItem extends RoseItem {
 class SulfurasRoseItem extends RoseItem {
   updateQuality(): void {
   }
+  updateSellIn(): void {
+  }
 }
 
 
@@ -122,11 +124,10 @@ export class GildedRose {
       } else if (item.name == this.SULFURAS) {
         normalRoseItem.updateQuality();
       }
+
+      normalRoseItem.updateSellIn();
     }
 
-    for (let item of this.items) {
-      item.sellIn = this.decreaseSellIn(item);
-    }
 
     for (let item of this.items) {
       const normalRoseItem = this.getRoseClass(item);
