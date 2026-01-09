@@ -42,6 +42,10 @@ abstract class RoseItem implements RoseItem {
   getSellIn(): number {
     return this.item.sellIn;
   }
+
+  setQuality(value: number) {
+    this.item.quality = value;
+  }
 }
 
 class RegualrRoseItem extends RoseItem {
@@ -66,6 +70,19 @@ class AgedBrieRoseItem extends RoseItem {
   }
 }
 
+class BackstagePassesRoseItem extends RoseItem {
+  updateQuality(): void {
+    if (this.getSellIn() < 0) {
+      this.setQuality(0);
+    } else if (this.getSellIn() < 5) {
+      this.increaseQuality(3);
+    } else if (this.getSellIn() < 10) {
+      this.increaseQuality(2);
+    } else {
+      this.increaseQuality(1);
+    }
+  }
+}
 
 export class GildedRose {
 
@@ -75,6 +92,9 @@ export class GildedRose {
     }
     if (item.name == this.AGED_BRIE) {
       return new AgedBrieRoseItem(item);
+    }
+    if (item.name == this.BACKSTAGE_PASSES) {
+      return new BackstagePassesRoseItem(item);
     }
     return new RegualrRoseItem(item);
   }
