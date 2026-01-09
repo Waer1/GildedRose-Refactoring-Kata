@@ -40,8 +40,6 @@ abstract class RoseItem implements RoseItem {
   }
 }
 
-
-
 class RegualrRoseItem extends RoseItem {
   updateQuality(): void {
     this.decreaseQuality(1);
@@ -101,8 +99,10 @@ export class GildedRose {
       }
       else if (item.name == this.BACKSTAGE_PASSES) {
         item.quality = 0
+      } else if (item.name == this.SULFURAS){
       } else {
-        item.quality = this.decreaseQuality(item)
+        const normalRoseItem = this.getRoseClass(item);
+        normalRoseItem.updateQuality();
       }
 
     }
@@ -122,16 +122,6 @@ export class GildedRose {
       item.sellIn = item.sellIn - 1;
     }
     return item.sellIn
-  }
-
-  private decreaseQuality(item: Item) {
-    if (item.name == this.SULFURAS) {
-      return item.quality
-    }
-    if (item.quality > this.MIN_QUALITY) {
-      item.quality = item.quality - 1
-    }
-    return item.quality
   }
 
   private getBackstagePassesQuality(item: Item) {
