@@ -81,7 +81,12 @@ export class GildedRose {
         item.quality = this.increaseQuality(item.quality)
       } else if(item.name == this.BACKSTAGE_PASSES) {
           item.quality = this.increaseQuality(item.quality)
-          item.quality = this.getBackstagePassesQuality(item)
+          if(item.sellIn < this.BACKSTAGE_PASSES_PLUS_ONE_SELL_IN) {
+            item.quality = this.increaseQuality(item.quality)
+          }
+          if(item.sellIn < this.BACKSTAGE_PASSES_PLUS_TWO_SELL_IN) {
+            item.quality = this.increaseQuality(item.quality)
+          }
       } else if(item.name == this.SULFURAS) {
 
       }
@@ -126,16 +131,6 @@ export class GildedRose {
     return item.sellIn
   }
 
-  private getBackstagePassesQuality(item: Item) {
-    let quality = item.quality;
-    if (item.sellIn < this.BACKSTAGE_PASSES_PLUS_ONE_SELL_IN) {
-      quality = this.increaseQuality(quality)
-    }
-    if (item.sellIn < this.BACKSTAGE_PASSES_PLUS_TWO_SELL_IN) {
-      quality = this.increaseQuality(quality)
-    }
-    return quality
-  }
 
   private isNormalRose(name: string) {
     return name != this.AGED_BRIE && name != this.BACKSTAGE_PASSES && name != this.SULFURAS;
