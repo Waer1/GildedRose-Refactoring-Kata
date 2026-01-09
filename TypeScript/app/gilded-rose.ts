@@ -25,7 +25,7 @@ export class GildedRose {
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
 
-      if (this.items[i].name != this.AGED_BRIE && this.items[i].name != this.BACKSTAGE_PASSES && this.items[i].name != this.SULFURAS) {
+      if (this.isNormalRose(this.items[i].name)) {
 
         if (this.items[i].quality > 0) {
             this.items[i].quality = this.items[i].quality - 1
@@ -79,5 +79,9 @@ export class GildedRose {
     }
 
     return this.items;
+  }
+
+  private isNormalRose(name: string) {
+    return name != this.AGED_BRIE && name != this.BACKSTAGE_PASSES && name != this.SULFURAS;
   }
 }
