@@ -40,12 +40,7 @@ export class GildedRose {
         if (this.items[i].quality < this.MAX_QUALITY) {
           this.items[i].quality = this.increaseQuality(this.items[i].quality)
           if (this.items[i].name == this.BACKSTAGE_PASSES) {
-            if (this.items[i].sellIn < this.BACKSTAGE_PASSES_PLUS_ONE_SELL_IN) {
-              this.items[i].quality = this.increaseQuality(this.items[i].quality)
-            }
-            if (this.items[i].sellIn < this.BACKSTAGE_PASSES_PLUS_TWO_SELL_IN) {
-              this.items[i].quality = this.increaseQuality(this.items[i].quality)
-            }
+            this.items[i].quality = this.getBackstagePassesQuality(this.items[i])
           }
         }
 
@@ -88,6 +83,17 @@ export class GildedRose {
         item.sellIn = item.sellIn - 1;
       }
       return item.sellIn
+  }
+
+  private getBackstagePassesQuality(item: Item) {
+    let quality = item.quality;
+    if (item.sellIn < this.BACKSTAGE_PASSES_PLUS_ONE_SELL_IN) {
+      quality = this.increaseQuality(quality)
+    }
+    if (item.sellIn < this.BACKSTAGE_PASSES_PLUS_TWO_SELL_IN) {
+      quality = this.increaseQuality(quality)
+    }
+    return quality
   }
 
   private isNormalRose(name: string) {
